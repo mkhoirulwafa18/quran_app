@@ -33,7 +33,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   intl: ^0.18.1
-  just_audio: ^0.9.31
+  just_audio: ^0.9.36
   notification_permissions: ^0.6.1
   path_provider: ^2.0.12
   scrollable_positioned_list: ^0.3.5
