@@ -35,7 +35,7 @@ dependencies:
   intl: ^0.18.1
   just_audio: ^0.9.31
   notification_permissions: ^0.6.1
-  path_provider: ^2.0.12
+  path_provider: ^2.1.2
   scrollable_positioned_list: ^0.3.5
   shared_preferences: ^2.0.15
 
