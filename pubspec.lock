@@ -301,10 +301,10 @@ packages:
     dependency: "direct main"
     description:
       name: feedback
-      sha256: a3a18af1d490b1e172cc354f1270760d14d2d0d5bb65e2d3710565de88507f33
+      sha256: fe585cb251d08074e25ba8a7f19c58861bda48387855c27ff84d8f8622873de6
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.0"
+    version: "3.0.1"
   ffi:
     dependency: transitive
     description:
