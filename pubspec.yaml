@@ -29,7 +29,7 @@ dependencies:
   flutter_svg: ^1.1.6
   flutter_timezone: ^1.0.8
   geocoding: ^2.0.5
-  geolocator: ^9.0.2
+  geolocator: ^11.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   intl: ^0.18.1
