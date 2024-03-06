@@ -1,20 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quran_app/common/constants/constant.dart';
 import 'package:quran_app/l10n/l10n.dart';
-import 'package:quran_app/modules/surah/surah_page.dart';
-import 'package:quran_app/modules/surah_list/models/quran.dart';
+import 'package:quran_app/modules/surah_list/models/surah.dart';
 import 'package:quran_app/modules/surah_list/widgets/rub_el_hizb.dart';
 
 class SurahListData extends StatelessWidget {
   const SurahListData({
     super.key,
-    required List<Quran> quran,
-    required this.dataQuran,
-  }) : _quran = quran;
+    required List<Surah> surah,
+  }) : _surah = surah;
 
-  final List<Quran> _quran;
-  final List<Quran> dataQuran;
+  final List<Surah> _surah;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +21,10 @@ class SurahListData extends StatelessWidget {
     return Expanded(
       child: ColoredBox(
         color: backgroundColor,
-        child: _quran.isNotEmpty
+        child: _surah.isNotEmpty
             ? ListView.separated(
-                itemCount: _quran.length,
+                physics: const BouncingScrollPhysics(),
+                itemCount: _surah.length,
                 separatorBuilder: (_, i) => Divider(
                   color: backgroundColor2,
                 ),
@@ -51,12 +51,12 @@ class SurahListData extends StatelessWidget {
   ListTile _buildItem(int index, BuildContext context) {
     return ListTile(
       leading: RubElHizb(
-        number: _quran[index].numberOfSurah.toString(),
+        number: _surah[index].number.toString(),
       ),
       title: Text(
-        _quran[index].name ?? '',
+        _surah[index].nameTransliteration,
         style: mediumText.copyWith(
-          color: backgroundColor2,
+          color: Colors.black,
         ),
       ),
       subtitle: Row(
@@ -67,7 +67,7 @@ class SurahListData extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: _quran[index].nameTranslations!.id ?? '',
+                    text: _surah[index].nameTranslation,
                     style: smallText.copyWith(
                       color: backgroundColor2.withOpacity(0.7),
                     ),
@@ -77,7 +77,7 @@ class SurahListData extends StatelessWidget {
                       width: 5,
                     ),
                   ),
-                  if (_quran[index].place == Place.mecca)
+                  if (_surah[index].revelation == 'Makkiyyah')
                     WidgetSpan(
                       child: SvgPicture.asset(
                         '$iconAsset/mecca.svg',
@@ -101,19 +101,20 @@ class SurahListData extends StatelessWidget {
       ),
       dense: true,
       trailing: Text(
-        _quran[index].nameTranslations!.ar ?? '',
+        _surah[index].nameShort,
         style: arabicText,
       ),
       onTap: () {
-        Navigator.push<MaterialPageRoute<dynamic>>(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SurahPage(
-              noSurah: _quran[index].numberOfSurah! - 1,
-              dataQuran: dataQuran,
-            ),
-          ),
-        );
+        log(_surah[index].nameTransliteration);
+        // Navigator.push<MaterialPageRoute<dynamic>>(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => SurahPage(
+        //       noSurah: _surah[index].numberOfSurah! - 1,
+        //       dataQuran: dataQuran,
+        //     ),
+        //   ),
+        // );
       },
     );
   }

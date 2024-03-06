@@ -49,8 +49,7 @@ class App extends StatelessWidget {
             Colors.yellow,
           ],
         ),
-        feedbackBuilder: (context, onSubmit, scrollController) =>
-            CustomFeedbackForm(
+        feedbackBuilder: (context, onSubmit, scrollController) => CustomFeedbackForm(
           onSubmit: onSubmit,
           scrollController: scrollController,
         ),
@@ -62,7 +61,7 @@ class App extends StatelessWidget {
           builder: (ctx, child) {
             setupScreenUtil(ctx);
             return MediaQuery(
-              data: MediaQuery.of(ctx).copyWith(textScaleFactor: 1),
+              data: MediaQuery.of(ctx).copyWith(textScaler: TextScaler.noScaling),
               child: ScrollConfiguration(
                 behavior: MyBehavior(),
                 child: child!,

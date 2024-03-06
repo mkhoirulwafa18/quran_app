@@ -40,11 +40,10 @@ class _SurahInfoState extends State<SurahInfo> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
+    return PopScope(
+      onPopInvoked: (val) {
         context.read<MurattalCubit>().dispose();
         Navigator.pop(context);
-        return Future.value(false);
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),

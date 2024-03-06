@@ -10,8 +10,7 @@ import 'package:quran_app/common/widgets/base_page.dart';
 import 'package:quran_app/common/widgets/custom_app_bar.dart';
 import 'package:quran_app/l10n/l10n.dart';
 import 'package:quran_app/modules/home/widgets/input_box.dart';
-import 'package:quran_app/modules/surah/surah_page.dart';
-import 'package:quran_app/modules/surah_list/models/quran.dart';
+import 'package:quran_app/modules/surah_list/models/surah.dart';
 import 'package:quran_app/modules/surah_list/widgets/surah_list_data.dart';
 
 class SurahListPage extends StatefulWidget {
@@ -21,18 +20,16 @@ class SurahListPage extends StatefulWidget {
   State<SurahListPage> createState() => _SurahListPageState();
 }
 
-class _SurahListPageState extends State<SurahListPage>
-    with WidgetsBindingObserver {
-  List<Quran> _dataQuran = [];
-  List<Quran> _quran = [];
+class _SurahListPageState extends State<SurahListPage> with WidgetsBindingObserver {
+  List<Surah> _dataSurah = [];
+  List<Surah> _surah = [];
 
   Future<void> readJson() async {
-    final quranResponse =
-        await rootBundle.loadString('$sourcesAsset/quran.json');
-    final quranData = quranFromJson(quranResponse);
+    final surahResponse = await rootBundle.loadString('$sourcesAsset/surahs.json');
+    final surahData = surahFromJson(surahResponse);
     setState(() {
-      _dataQuran = quranData;
-      _quran = quranData;
+      _dataSurah = surahData;
+      _surah = surahData;
     });
   }
 
@@ -40,13 +37,13 @@ class _SurahListPageState extends State<SurahListPage>
     final keyword = key.toLowerCase().replaceAll(RegExp("[^0-9a-zA-Z']"), '');
     if (keyword == '') {
       setState(() {
-        _quran = _dataQuran;
+        _surah = _dataSurah;
       });
     } else {
       setState(() {
-        _quran = _dataQuran
+        _surah = _dataSurah
             .where(
-              (element) => element.name!
+              (element) => element.nameTransliteration
                   .toLowerCase()
                   .replaceAll(
                     RegExp("[^0-9a-zA-Z']"),
@@ -66,16 +63,16 @@ class _SurahListPageState extends State<SurahListPage>
   }
 
   void goToSurah({int? noSurah, bool? startScroll}) {
-    Navigator.push<MaterialPageRoute<dynamic>>(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SurahPage(
-          noSurah: noSurah!,
-          dataQuran: _dataQuran,
-          startScroll: startScroll,
-        ),
-      ),
-    );
+    // Navigator.push<MaterialPageRoute<dynamic>>(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => SurahPage(
+    //       noSurah: noSurah!,
+    //       dataQuran: _dataSurah,
+    //       startScroll: startScroll,
+    //     ),
+    //   ),
+    // );
   }
 
   MaterialBanner _showMaterialBanner(BuildContext context) {
@@ -161,10 +158,9 @@ class _SurahListPageState extends State<SurahListPage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (_dataQuran.isNotEmpty)
+            if (_dataSurah.isNotEmpty)
               SurahListData(
-                quran: _quran,
-                dataQuran: _dataQuran,
+                surah: _surah,
               )
             else
               const AppLoading(),

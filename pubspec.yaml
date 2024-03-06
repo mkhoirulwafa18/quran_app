@@ -28,11 +28,13 @@ dependencies:
   flutter_slidable: ^3.0.0
   flutter_svg: ^1.1.6
   flutter_timezone: ^1.0.8
+  freezed_annotation: ^2.4.1
   geocoding: ^2.0.5
   geolocator: ^9.0.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   intl: ^0.18.1
+  json_annotation: ^4.8.1
   just_audio: ^0.9.31
   notification_permissions: ^0.6.1
   path_provider: ^2.0.12
@@ -45,7 +47,9 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
+  freezed: ^2.4.7
   hive_generator: ^2.0.0
+  json_serializable: ^6.7.1
   mocktail: ^0.3.0
   very_good_analysis: ^5.1.0
 
